@@ -1,0 +1,9 @@
+app:
+  cookies:
+    secure: true
+
+logging:
+  level:
+    root: INFO
+    com.interviewiq: INFO
+

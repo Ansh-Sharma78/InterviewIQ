@@ -1,0 +1,7 @@
+import { apiClient } from '../../lib/apiClient.js';
+
+export async function getDashboardSummary() {
+  const response = await apiClient.get('/dashboard/summary');
+  return response.data;
+}
+

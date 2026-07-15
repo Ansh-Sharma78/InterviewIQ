@@ -1,0 +1,16 @@
+CREATE TABLE users (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    email VARCHAR(255) NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    full_name VARCHAR(120) NOT NULL,
+    target_role VARCHAR(120) NULL,
+    experience_level VARCHAR(80) NULL,
+    target_companies VARCHAR(500) NULL,
+    role VARCHAR(30) NOT NULL,
+    active BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+    PRIMARY KEY (id),
+    CONSTRAINT uk_users_email UNIQUE (email)
+);
+

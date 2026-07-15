@@ -1,0 +1,54 @@
+
+version: '3.8'
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-interviewiq}
+      MYSQL_USER: ${MYSQL_USER:-interviewiq}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-interviewiq}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_NAME=${MYSQL_DATABASE:-interviewiq}
+      - DB_USERNAME=${MYSQL_USER:-interviewiq}
+      - DB_PASSWORD=${MYSQL_PASSWORD:-interviewiq}
+    ports:
+      - "${BACKEND_PORT:-8080}:8080"
+    depends_on:
+      - db
+      - redis
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    environment:
+      - BACKEND_PROXY_TARGET=http://backend:8080
+
+volumes:
+  db-data:
+

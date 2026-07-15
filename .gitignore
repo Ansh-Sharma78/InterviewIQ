@@ -1,0 +1,38 @@
+# Environment files
+.env
+.env.*
+!.env.example
+
+# IDE / editor files
+.idea/
+.vscode/
+*.iml
+.classpath
+.project
+.settings/
+.factorypath
+.springBeans
+
+# Build output
+backend/target/
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/coverage/
+frontend/.vite/
+**/target/
+**/build/
+**/dist/
+**/node_modules/
+
+# Uploads / generated content
+uploads/
+*.log
+*.tmp
+*.pid
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
